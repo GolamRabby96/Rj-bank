@@ -43,7 +43,7 @@
 				<div class="col-md-4">
 					<div class="withdraw bank-status">
 						<h3>Withdraw</h3>
-						<h1>$ <span id="">00</span></h1>
+						<h1>$ <span id="currentWithraw">00</span></h1>
 					</div>
 				</div>
 				<div class="col-md-4">
@@ -90,23 +90,23 @@
             const depositBtn = document.getElementById('addDeposit');
             depositBtn.addEventListener('click', function(){
                 const depositNumber = getInputNumber("depositAmount")
-                /*
+                /*  code ---- 01
                 const depositAmount = document.getElementById('depositAmount').value;
                 const depositNumber = parseFloat(depositAmount);
                 */
-                /*
+                /* code---->02
                 const currentDeposit = document.getElementById('currentDeposit').innerText;
                 const currentDepositNumber = parseFloat(currentDeposit);
                 const totalDeposit = depositNumber + currentDepositNumber;
                 document.getElementById('currentDeposit').innerText = totalDeposit;
                 */
 
-                updateBlance("currentBlance", depositNumber)
-                updateBlance("currentDeposit", depositNumber)
+                updateBlance("currentBlance", depositNumber);
+                updateBlance("currentDeposit", depositNumber);
                 document.getElementById('depositAmount').value = "";
 
 
-                /*
+                /* code--->02
                 const currentBlance = document.getElementById('currentBlance').innerText;
                 const currentBlanceNumber = parseFloat(currentBlance);
                 const totalBlance = depositNumber + currentBlanceNumber;
@@ -118,16 +118,21 @@
             const WithdrawBtn = document.getElementById('addWithdraw');
             WithdrawBtn.addEventListener('click', function(){
                 const withdrawNumber = getInputNumber("withdrawAmount")
-                console.log(withdrawNumber);
+
+                updateBlance("currentWithraw", withdrawNumber)
+                updateBlance("currentBlance", -1 * withdrawNumber)
+
+                document.getElementById('withdrawAmount').value = "";
             })
 
-            function getInputNumber(id){
+            //code -----> 01
+            function getInputNumber(id){ 
                 const amount = document.getElementById(id).value;
                 const amountNumber = parseFloat(amount);
                 return amountNumber;
             }
 
-
+            //code--->02
             function updateBlance(id,depositNumber){
                 const currentBlance = document.getElementById(id).innerText;
                 const currentNumber = parseFloat(currentBlance);
